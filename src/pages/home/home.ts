@@ -11,6 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 })
 export class HomePage {
     contactList: any = [];
+    allPhotos: any = [];
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
         private _localNotifications: LocalNotifications,
@@ -34,19 +35,19 @@ export class HomePage {
                     //     res => console.log(res),
                     //     err => console.log(err)
                     // );
-
-                    library.forEach(function (libraryItem) {
-                        console.log(libraryItem.id);          // ID of the photo
-                        console.log(libraryItem.photoURL);    // Cross-platform access to photo
-                        console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
-                        console.log(libraryItem.fileName);
-                        console.log(libraryItem.width);
-                        console.log(libraryItem.height);
-                        console.log(libraryItem.creationDate);
-                        console.log(libraryItem.latitude);
-                        console.log(libraryItem.longitude);
-                        console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
-                    });
+                    this.allPhotos = library;
+                    // library.forEach(function (libraryItem) {
+                    //     console.log(libraryItem.id);          // ID of the photo
+                    //     console.log(libraryItem.photoURL);    // Cross-platform access to photo
+                    //     console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
+                    //     console.log(libraryItem.fileName);
+                    //     console.log(libraryItem.width);
+                    //     console.log(libraryItem.height);
+                    //     console.log(libraryItem.creationDate);
+                    //     console.log(libraryItem.latitude);
+                    //     console.log(libraryItem.longitude);
+                    //     console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
+                    // });
                 },
                 error: err => { console.log('Thông báo!', err); },
                 complete: () => { console.log('Thông báo!', 'done getting photos'); }

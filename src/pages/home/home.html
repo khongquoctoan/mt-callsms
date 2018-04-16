@@ -19,10 +19,29 @@
     </ion-row>
 
     <ion-list>
+        <ion-item>
+            <p>ALL CONTACTS</p>
+        </ion-item>
         <ion-item *ngFor="let item of contactList">
             <h2>{{ item.displayName || 'Empty' }}</h2>
             <p>M: {{ item.phoneNumbers || '-' }} <i *ngIf="item.phoneNumbers!=''" style="float:right;" (click)="callNumber(item.phoneNumbers)">Call</i></p>
             <p>E: {{ item.emails || '-'}}</p>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-item>
+            <p>ALL PHOTO</p>
+        </ion-item>
+        <ion-item *ngFor="let item of allPhotos">
+            <ion-thumbnail item-start>
+                {{ item.id }}
+            </ion-thumbnail>
+            <h2>Name: {{item.fileName}} - AlbumID: {{ item.albumIds }}</h2>
+            <p>{{ item.photoURL }}</p>
+            <p>{{ item.thumbnailURL }}</p>
+            <p>W: {{ item.width }} - H: {{ item.height }} </p>
+            <p>{{ item.creationDate }}</p>
         </ion-item>
     </ion-list>
 </ion-content>
