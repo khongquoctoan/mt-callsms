@@ -1,0 +1,8 @@
+{
+  "name": "mt-callsms",
+  "app_id": "c09eee0b",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
