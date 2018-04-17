@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts } from '@ionic-native/contacts';
 import { PhotoLibrary } from '@ionic-native/photo-library';
-
+import { Camera } from '@ionic-native/camera';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
@@ -30,6 +30,7 @@ import { HomePage } from '../pages/home/home';
         SplashScreen,
         LocalNotifications,
         Contacts,
+        Camera,
         PhotoLibrary,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]

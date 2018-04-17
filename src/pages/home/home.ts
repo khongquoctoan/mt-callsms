@@ -1,4 +1,5 @@
 import { PhotoLibrary } from '@ionic-native/photo-library';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { CallNumber } from '@ionic-native/call-number';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { Component } from '@angular/core';
@@ -12,20 +13,31 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 export class HomePage {
     contactList: any = [];
     allPhotos: any = [];
+    cameraResult: any = '';
+    photoError: any = '';
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
         private _localNotifications: LocalNotifications,
         private _contacts: Contacts,
+        private _camera: Camera,
         private _photoLibrary: PhotoLibrary) {
 
     }
     ionViewDidLoad() {
-        this._localNotifications.schedule({
-            id: 1,
+        // this._localNotifications.schedule({
+        //     id: 1,
+        //     text: 'Single ILocalNotification',
+        //     data: 'test'
+        // });
+    }
+
+    openNotify(){
+        this._localNotifications.schedule({            
             text: 'Single ILocalNotification',
             data: 'test'
         });
     }
+
     getAllPhotos() {
 
         this._photoLibrary.requestAuthorization().then(() => {
@@ -49,11 +61,12 @@ export class HomePage {
                     //     console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
                     // });
                 },
-                error: err => { console.log('Thông báo!', err); },
-                complete: () => { console.log('Thông báo!', 'done getting photos'); }
+                error: err => { this.photoError = err; console.log('Thông báo!', err); },
+                complete: () => { this.photoError = 'done getting photos'; console.log('Thông báo!', 'done getting photos'); }
             });
         })
             .catch(err => {
+                this.photoError = 'permissions weren\'t granted';
                 console.log('Thông báo!', 'permissions weren\'t granted');
             });
     }
@@ -63,7 +76,6 @@ export class HomePage {
             ['displayName', 'name', 'phoneNumbers', 'emails'],
             { filter: "", multiple: true })
             .then(data => {
-
 
                 for (var i = 0; i < data.length; i++) {
                     var contact = data[i];
@@ -97,4 +109,21 @@ export class HomePage {
     //         .catch(err => console.log('Error launching dialer', err));
     // }
 
+
+    openCamrera() {
+        const options: CameraOptions = {
+            quality: 100,
+            destinationType: this._camera.DestinationType.DATA_URL,
+            encodingType: this._camera.EncodingType.JPEG,
+            mediaType: this._camera.MediaType.PICTURE
+        }
+        this._camera.getPicture(options).then((imageData) => {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64:
+            this.cameraResult = 'data:image/jpeg;base64,' + imageData;
+        }, (err) => {
+            this.cameraResult = 'ERROR: ' + err;
+            // Handle error
+        });
+    }
 }

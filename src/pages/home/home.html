@@ -18,6 +18,27 @@
         </ion-col>
     </ion-row>
 
+    <ion-row>
+        <ion-col padding>
+            <button ion-button class="submit-btn" block type="button" (click)="openCamrera()">Open Camera</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col padding>
+            <button ion-button class="submit-btn" block type="button" (click)="openNotify()">Open Notify</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-list>
+        <ion-item>
+            <p>CAMERA RESULT</p>
+        </ion-item>
+        <ion-item>
+            {{ cameraResult }}
+        </ion-item>
+    </ion-list>
+
     <ion-list>
         <ion-item>
             <p>ALL CONTACTS</p>
@@ -32,6 +53,7 @@
     <ion-list>
         <ion-item>
             <p>ALL PHOTO</p>
+            <p *ngIf="photoError">{{ photoError }}</p>
         </ion-item>
         <ion-item *ngFor="let item of allPhotos">
             <ion-thumbnail item-start>
