@@ -2,7 +2,7 @@ import { FCM } from '@ionic-native/fcm';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { CallNumber } from '@ionic-native/call-number';
-import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import { Contacts } from '@ionic-native/contacts';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -139,15 +139,16 @@ export class HomePage {
             // this.openNotify("Token: "+ token);
             this.fcmToken = token;
             // backend.registerToken(token);
+            console.log('token: ', token);
         });
 
         this._fcm.onNotification().subscribe(data => {
             if (data.wasTapped) {
                 this.openNotify("Received in background");
-                // console.log("Received in background");
+                console.log("Received in background");
             } else {
                 this.openNotify("Received in foreground");
-                // console.log("Received in foreground");
+                console.log("Received in foreground");
             };
         });
 
