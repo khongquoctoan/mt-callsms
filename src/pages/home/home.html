@@ -34,8 +34,11 @@
         <ion-item>
             <p>CAMERA RESULT</p>
         </ion-item>
-        <ion-item>
-            {{ cameraResult }}
+        <ion-item *ngIf="cameraResult.status">
+            <img [src]="cameraResult.data | safe" />
+        </ion-item>
+        <ion-item *ngIf="!cameraResult.status">
+            {{ cameraResult.error }}
         </ion-item>
     </ion-list>
 

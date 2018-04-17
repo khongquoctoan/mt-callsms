@@ -8,12 +8,18 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts } from '@ionic-native/contacts';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera } from '@ionic-native/camera';
+
+import { SafePipe } from './../pipes/safe.pipe';
+import { CurrencyVndPipe } from './../pipes/currency-vnd.pipe';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 @NgModule({
     declarations: [
         MyApp,
+        SafePipe,
+        CurrencyVndPipe,
         HomePage
     ],
     imports: [

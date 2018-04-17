@@ -13,7 +13,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 export class HomePage {
     contactList: any = [];
     allPhotos: any = [];
-    cameraResult: any = '';
+    cameraResult: any = {'status' : false, 'data': '', 'error' : ''};
     photoError: any = '';
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
@@ -120,9 +120,11 @@ export class HomePage {
         this._camera.getPicture(options).then((imageData) => {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64:
-            this.cameraResult = 'data:image/jpeg;base64,' + imageData;
+            this.cameraResult.status = true;
+            this.cameraResult.data = 'data:image/jpeg;base64,' + imageData;
         }, (err) => {
-            this.cameraResult = 'ERROR: ' + err;
+            this.cameraResult.status = false;
+            this.cameraResult.error = 'ERROR: ' + err;
             // Handle error
         });
     }
