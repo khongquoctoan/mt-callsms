@@ -30,6 +30,21 @@
         </ion-col>
     </ion-row>
 
+    <ion-row>
+        <ion-col padding>
+            <button ion-button class="submit-btn" block type="button" (click)="demoFCM()">Demo FCM</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-list>
+        <ion-item>
+            <p>FCM Token</p>
+        </ion-item>
+        <ion-item>
+            {{ fcmToken }}
+        </ion-item>
+    </ion-list>
+
     <ion-list>
         <ion-item>
             <p>CAMERA RESULT</p>

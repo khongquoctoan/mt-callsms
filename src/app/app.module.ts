@@ -8,6 +8,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts } from '@ionic-native/contacts';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera } from '@ionic-native/camera';
+import { FCM } from '@ionic-native/fcm';
 
 import { SafePipe } from './../pipes/safe.pipe';
 import { CurrencyVndPipe } from './../pipes/currency-vnd.pipe';
@@ -37,6 +38,7 @@ import { HomePage } from '../pages/home/home';
         LocalNotifications,
         Contacts,
         Camera,
+        FCM,
         PhotoLibrary,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]

@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { CallNumber } from '@ionic-native/call-number';
@@ -13,13 +14,15 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 export class HomePage {
     contactList: any = [];
     allPhotos: any = [];
-    cameraResult: any = {'status' : false, 'data': '', 'error' : ''};
+    cameraResult: any = { 'status': false, 'data': '', 'error': '' };
     photoError: any = '';
+    fcmToken: any = '';
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
         private _localNotifications: LocalNotifications,
         private _contacts: Contacts,
         private _camera: Camera,
+        private _fcm: FCM,
         private _photoLibrary: PhotoLibrary) {
 
     }
@@ -31,9 +34,9 @@ export class HomePage {
         // });
     }
 
-    openNotify(){
-        this._localNotifications.schedule({            
-            text: 'Single ILocalNotification',
+    openNotify(textNotify = 'Single ILocalNotification') {
+        this._localNotifications.schedule({
+            text: textNotify,
             data: 'test'
         });
     }
@@ -127,5 +130,31 @@ export class HomePage {
             this.cameraResult.error = 'ERROR: ' + err;
             // Handle error
         });
+    }
+
+    demoFCM() {
+        this._fcm.subscribeToTopic('marketing');
+
+        this._fcm.getToken().then(token => {
+            // this.openNotify("Token: "+ token);
+            this.fcmToken = token;
+            // backend.registerToken(token);
+        });
+
+        this._fcm.onNotification().subscribe(data => {
+            if (data.wasTapped) {
+                this.openNotify("Received in background");
+                // console.log("Received in background");
+            } else {
+                this.openNotify("Received in foreground");
+                // console.log("Received in foreground");
+            };
+        });
+
+        // this._fcm.onTokenRefresh().subscribe(token => {
+        //     backend.registerToken(token);
+        // });
+
+        // this._fcm.unsubscribeFromTopic('marketing');
     }
 }
