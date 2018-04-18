@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "436713862505",
+    "firebase_url": "https://optimum-task-192708.firebaseio.com",
+    "project_id": "optimum-task-192708",
+    "storage_bucket": "optimum-task-192708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436713862505:android:66bf359b85855417",
+        "android_client_info": {
+          "package_name": "com.maxtot.mtapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436713862505-0pc1p1cda64fmt99ugv9qr8i6ibdrfkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi-y4D4E83GHLSwAsxFyg2yM6bhqnZ1yw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

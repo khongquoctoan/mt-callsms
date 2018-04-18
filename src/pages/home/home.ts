@@ -158,4 +158,28 @@ export class HomePage {
 
         // this._fcm.unsubscribeFromTopic('marketing');
     }
+
+    sendNotification() {
+        // let body = {
+        //     "notification": {
+        //         "title": "New Notification has arrived",
+        //         "body": "Notification Body",
+        //         "sound": "default",
+        //         "click_action": "FCM_PLUGIN_ACTIVITY",
+        //         "icon": "fcm_push_icon"
+        //     },
+        //     "data": {
+        //         "param1": "value1",
+        //         "param2": "value2"
+        //     },
+        //     "to": "/topics/all",
+        //     "priority": "high",
+        //     "restricted_package_name": ""
+        // }
+        // let options = new HttpHeaders().set('Content-Type', 'application/json');
+        // this.http.post("https://fcm.googleapis.com/fcm/send", body, {
+        //     headers: options.set('Authorization', 'key=YourAuthToken'),
+        // })
+        //     .subscribe();
+    }
 }
