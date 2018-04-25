@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DataService } from '../../services/data.service';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
     selector: 'page-home',
@@ -21,19 +22,22 @@ export class HomePage {
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
         private _dataService: DataService,
+        private _socketService : SocketService,
         private _localNotifications: LocalNotifications,
         private _contacts: Contacts,
         private _camera: Camera,
         private _fcm: FCM,
         private _photoLibrary: PhotoLibrary) {
 
+            this._socketService.connect();
+            this._socketService.listEvent('deviceStatus', false).subscribe(data => {
+                data = this._socketService.decodeDataFromSocket(data);
+                console.log('socketService deviceStatus: ', data);
+            });
     }
+
     ionViewDidLoad() {
-        // this._localNotifications.schedule({
-        //     id: 1,
-        //     text: 'Single ILocalNotification',
-        //     data: 'test'
-        // });
+        
     }
 
     openNotify(textNotify = 'Thông báo mới', dataNotify : any = {}) {

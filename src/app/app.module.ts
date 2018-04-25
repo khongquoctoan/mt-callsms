@@ -11,13 +11,15 @@ import { Contacts } from '@ionic-native/contacts';
 import { PhotoLibrary } from '@ionic-native/photo-library';
 import { Camera } from '@ionic-native/camera';
 import { FCM } from '@ionic-native/fcm';
-
 import { SafePipe } from './../pipes/safe.pipe';
 import { CurrencyVndPipe } from './../pipes/currency-vnd.pipe';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DataService } from '../services/data.service';
+import { SocketService } from './../services/socket.service';
+
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'https://cti-connector-mipbx.mipbx.vn:5009/', options: {} };
 
 @NgModule({
     declarations: [
@@ -30,7 +32,8 @@ import { DataService } from '../services/data.service';
         HttpModule,
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        IonicStorageModule.forRoot()
+        IonicStorageModule.forRoot(),
+        SocketIoModule.forRoot(config)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -46,6 +49,7 @@ import { DataService } from '../services/data.service';
         FCM,
         PhotoLibrary,
         DataService,
+        SocketService,
         Network,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
