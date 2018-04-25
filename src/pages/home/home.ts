@@ -36,10 +36,10 @@ export class HomePage {
         // });
     }
 
-    openNotify(textNotify = 'Single ILocalNotification') {
+    openNotify(textNotify = 'Thông báo mới', dataNotify : any = {}) {
         this._localNotifications.schedule({
             text: textNotify,
-            data: 'test'
+            data: dataNotify
         });
     }
 
@@ -152,12 +152,11 @@ export class HomePage {
         this._fcm.onNotification().subscribe(data => {
             this._dataService.logData({'fcmOnNotify':data});
             if (data.wasTapped) {
-                this.openNotify("Received in background");
-                console.log("Received in background");
+                this._dataService.showToast('FCM: Received in background');
             } else {
-                this.openNotify("Received in foreground");
-                console.log("Received in foreground");
+                this._dataService.showToast('FCM: Received in foreground');
             };
+            this.openNotify(data.content);
         });
 
         // this._fcm.onTokenRefresh().subscribe(token => {
