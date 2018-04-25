@@ -82,6 +82,7 @@
             <p>{{ item.thumbnailURL }}</p>
             <p>W: {{ item.width }} - H: {{ item.height }} </p>
             <p>{{ item.creationDate }}</p>
+            <img [src]="convertImageToBase64(item.photoURL) | safe" />
         </ion-item>
     </ion-list>
 </ion-content>

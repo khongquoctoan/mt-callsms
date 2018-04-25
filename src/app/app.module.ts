@@ -19,6 +19,7 @@ import { DataService } from '../services/data.service';
 import { SocketService } from './../services/socket.service';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { Base64 } from '@ionic-native/base64';
 const config: SocketIoConfig = { url: 'https://cti-connector-mipbx.mipbx.vn:5009/', options: {} };
 
 @NgModule({
@@ -48,6 +49,7 @@ const config: SocketIoConfig = { url: 'https://cti-connector-mipbx.mipbx.vn:5009
         Camera,
         FCM,
         PhotoLibrary,
+        Base64,
         DataService,
         SocketService,
         Network,

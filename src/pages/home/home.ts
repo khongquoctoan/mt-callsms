@@ -1,5 +1,6 @@
 import { FCM } from '@ionic-native/fcm';
 import { PhotoLibrary } from '@ionic-native/photo-library';
+import { Base64 } from '@ionic-native/base64';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { CallNumber } from '@ionic-native/call-number';
 import { Contacts } from '@ionic-native/contacts';
@@ -27,7 +28,8 @@ export class HomePage {
         private _contacts: Contacts,
         private _camera: Camera,
         private _fcm: FCM,
-        private _photoLibrary: PhotoLibrary) {
+        private _photoLibrary: PhotoLibrary,
+        private _base64: Base64) {
 
             this._socketService.connect();
             this._socketService.listEvent('deviceStatus', false).subscribe(data => {
@@ -79,6 +81,17 @@ export class HomePage {
                 this.photoError = 'permissions weren\'t granted';
                 console.log('Thông báo!', 'permissions weren\'t granted');
             });
+    }
+    
+    convertImageToBase64(filePath){
+        this._base64.encodeFile(filePath).then((base64File: string) => {
+                console.log(base64File);
+                return base64File;
+            }, (err) => {
+                console.log(err);
+                return '';
+            }
+        );
     }
 
     getContactList() {
