@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.maxtot.mtapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>mt-callsms</name>
+    <name>KQT DEMO</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="khongquoctoan.it@gmail.com" href="http://khongquoctoan.com">Ionic Framework Team</author>
     <content src="index.html" />
