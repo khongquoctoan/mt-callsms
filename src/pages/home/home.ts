@@ -20,6 +20,7 @@ export class HomePage {
     cameraResult: any = { 'status': false, 'data': '', 'error': '' };
     photoError: any = '';
     fcmToken: any = '';
+    extStatus : any = 'Loading...';
     constructor(public navCtrl: NavController,
         // private _callNumber: CallNumber,
         private _dataService: DataService,
@@ -33,13 +34,26 @@ export class HomePage {
 
             this._socketService.connect();
             this._socketService.listEvent('deviceStatus', false).subscribe(data => {
-                data = this._socketService.decodeDataFromSocket(data);
-                console.log('socketService deviceStatus: ', data);
+                let extenStatus = this._socketService.decodeDataFromSocket(data);
+                if(typeof extenStatus.Exten != 'undefined' && extenStatus.Exten == '7101'){
+                    // console.log('socketService deviceStatus: ', extenStatus);
+                    this.extStatus = extenStatus.StatusText;
+                    // console.log('Extension: ',this.extStatus);
+                }
             });
+            // this._socketService.listEvent('deviceStatus', false).subscribe(this.saveExtensionStatus.bind(this));
     }
 
     ionViewDidLoad() {
         
+    }
+
+    saveExtensionStatus(data){
+        let extenStatus = this._socketService.decodeDataFromSocket(data);
+        if(typeof extenStatus.Exten != 'undefined' && extenStatus.Exten == '7101'){
+            console.log('socketService deviceStatus: ', extenStatus);
+            this.extStatus = extenStatus.extenStatus;
+        }
     }
 
     openNotify(textNotify = 'Thông báo mới', dataNotify : any = {}) {

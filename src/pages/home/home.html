@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            Ionic Blank
+            APP DEMO Plugins <i>{{ extStatus }}</i>
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -32,7 +32,7 @@
 
     <ion-row>
         <ion-col padding>
-            <button ion-button class="submit-btn" block type="button" (click)="demoFCM()">Demo FCM</button>
+            <button ion-button class="submit-btn" block type="button" (click)="demoFCM()">Connect FCM</button>
         </ion-col>
     </ion-row>
 
@@ -82,7 +82,6 @@
             <p>{{ item.thumbnailURL }}</p>
             <p>W: {{ item.width }} - H: {{ item.height }} </p>
             <p>{{ item.creationDate }}</p>
-            <img [src]="convertImageToBase64(item.photoURL) | safe" />
         </ion-item>
     </ion-list>
 </ion-content>
